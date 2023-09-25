@@ -31,7 +31,7 @@ postRouter.post("/add",auth,async(req,res)=>{
 postRouter.get("/",auth,async (req,res)=>{
     try {
         
-        const posts=await PostModel.find({name:req.body.name})
+        const posts=await PostModel.find({_id:req.body.userID})
 
         req.statusCode(200).send(posts)
     } catch (error) {
@@ -55,7 +55,7 @@ postRouter.patch("/update/:id",auth,async(req,res)=>{
     }
 })
 
-postRouter.patch("/delete/:id",auth,async(req,res)=>{
+postRouter.delete("/delete/:id",auth,async(req,res)=>{
     const {id}=req.params
     try {
         const post=await PostModel.findOne({_id:id})
